@@ -19,23 +19,23 @@ function UserForm({ user = null, onClose }) {
   const [formData, setFormData] = useState({
     username: user ? user.username : "",
     email: user ? user.email : "",
-    phoneNumber: user ? user.phoneNumber : "",
+    phone: user ? user.phone : "",
     skillsets: user ? user.skillsets.join(", ") : "",
     hobby: user ? user.hobby : "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { username, email, phoneNumber, skillsets, hobby } = formData;
+    const { username, email, phone, skillsets, hobby } = formData;
     const userData = {
       username,
       email,
-      phoneNumber,
+      phone,
       skillsets: skillsets.split(",").map((skill) => skill.trim()),
       hobby,
     };
     if (user) {
-      dispatch(updateUser({ id: user.id, userData }));
+      dispatch(updateUser({ _id: user._id, userData }));
     } else {
       dispatch(createUser(userData));
     }
@@ -67,9 +67,9 @@ function UserForm({ user = null, onClose }) {
         required
       />
       <TextField
-        name="phoneNumber"
+        name="phone"
         label="Phone number"
-        value={formData.phoneNumber}
+        value={formData.phone}
         onChange={handleChange}
         required
       />

@@ -13,6 +13,8 @@ import {
   IconButton,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   table: {
@@ -56,18 +58,21 @@ function UserList() {
           </TableHead>
           <TableBody>
             {users.map((user) => (
-              <TableRow key={user.id}>
+              <TableRow key={user._id}>
                 <TableCell>{user.username}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell>{user.phoneNumber}</TableCell>
+                <TableCell>{user.phone}</TableCell>
                 <TableCell>{user.skillsets.join(", ")}</TableCell>
                 <TableCell>{user.hobby}</TableCell>
                 <TableCell>
+                  <IconButton component={Link} to={`/api/users/${user._id}`}>
+                    <EditIcon color="inherit" />
+                  </IconButton>
                   <IconButton
                     aria-label="delete"
-                    onClick={() => handleDeleteUser(user.id)}
+                    onClick={() => handleDeleteUser(user._id)}
                   >
-                    <DeleteIcon />
+                    <DeleteIcon color="error" />
                   </IconButton>
                 </TableCell>
               </TableRow>
