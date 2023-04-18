@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
       padding: "10",
-      width: "100vh",
+      width: "500px",
       display: "flex",
       flexDirection: "column",
     },
@@ -45,11 +45,10 @@ function UserForm({ user = null, onClose }) {
       skillsets: skillsets.split(",").map((skill) => skill.trim()),
       hobby,
     };
-    if (user) {
-      dispatch(updateUser({ _id: user._id, userData }));
-    } else {
-      dispatch(createUser(userData));
-    }
+
+    user
+      ? dispatch(updateUser({ _id: user._id, userData }))
+      : dispatch(createUser(userData));
     onClose();
   };
 
