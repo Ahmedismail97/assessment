@@ -25,8 +25,8 @@ function App() {
 
   const handleEditUser = (user) => {
     setSelectedUser(user);
-    setDialogOpen(true);
     console.log("User", user);
+    setDialogOpen(true);
   };
 
   const handleCloseDialog = () => {

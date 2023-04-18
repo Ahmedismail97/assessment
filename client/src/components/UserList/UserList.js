@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers, deleteUser, updateUser } from "../../redux/user/userSlice";
+import { fetchUsers, deleteUser } from "../../redux/user/userSlice";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Table,
@@ -38,8 +38,8 @@ function UserList({ onEditUser }) {
     dispatch(deleteUser(id));
   };
 
-  const handleEditButton = (id) => {
-    onEditUser(id);
+  const handleEditButton = (user) => {
+    onEditUser(user);
   };
 
   let content;
