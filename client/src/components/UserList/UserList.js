@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers, deleteUser } from "../../redux/user/userSlice";
+import { fetchUsers, deleteUser, updateUser } from "../../redux/user/userSlice";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Table,
@@ -14,7 +14,6 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   table: {
@@ -22,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-function UserList() {
+function UserList({ onEditUser }) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.data);
   const status = useSelector((state) => state.users.status);
@@ -37,6 +36,10 @@ function UserList() {
 
   const handleDeleteUser = (id) => {
     dispatch(deleteUser(id));
+  };
+
+  const handleEditButton = (id) => {
+    onEditUser(id);
   };
 
   let content;
@@ -65,7 +68,10 @@ function UserList() {
                 <TableCell>{user.skillsets.join(", ")}</TableCell>
                 <TableCell>{user.hobby}</TableCell>
                 <TableCell>
-                  <IconButton component={Link} to={`/api/users/${user._id}`}>
+                  <IconButton
+                    aria-label="edit"
+                    onClick={() => handleEditButton(user)}
+                  >
                     <EditIcon color="inherit" />
                   </IconButton>
                   <IconButton

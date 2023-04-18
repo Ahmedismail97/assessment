@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import UserList from "./UserList/UserList";
 import UserForm from "./UserForm/UserForm";
-import {
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-} from "@material-ui/core";
+import { Button, Dialog, DialogTitle, DialogContent } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 
@@ -32,6 +26,7 @@ function App() {
   const handleEditUser = (user) => {
     setSelectedUser(user);
     setDialogOpen(true);
+    console.log("User", user);
   };
 
   const handleCloseDialog = () => {
@@ -55,11 +50,6 @@ function App() {
         <DialogContent>
           <UserForm user={selectedUser} onClose={handleCloseDialog} />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog} color="secondary">
-            Cancel
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );
